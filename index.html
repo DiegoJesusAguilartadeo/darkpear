@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link href="stylegame.css" rel="stylesheet"/>
+  <script src="game.js" defer></script>
+  <title>Tragaperras</title>
+</head>
+<body>
+
+    <header>
+      <div id="info-top">
+        <div id="izquierda-superior">
+          <div id="credito-container">
+            <span id="credito">Crédito:</span>
+            <span id="dinero">5</span>
+            <span id="dolar">$</span>
+          </div>
+          <div id="monedas"></div>
+        </div>
+  
+        <div id="puntos-container">
+          Puntaje total: <span id="puntaje">0</span>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- Nuevo contenedor -->
+    <main id="zona-juego">
+  <div id="contenedor-juego">
+    <div id="tirar">Tirar</div>
+
+    <section id="ventanas">
+      <div class="ventana">
+        <div class="imagen">
+          <img src="img/coin.png" alt="Moneda">
+        </div>
+      </div>
+      <div class="ventana">
+        <div class="imagen">
+          <img src="img/coin.png" alt="Moneda">
+        </div>
+      </div>
+      <div class="ventana">
+        <div class="imagen">
+          <img src="img/coin.png" alt="Moneda">
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+  <div id="velo">
+    <div id="cuadro_mensaje">
+      <img id="cruz" src="img/cancel.png" alt="Cerrar">
+      <div id="animacion-monedas"></div> <!-- contenedor de la animación -->
+      <div id="mensaje"></div>
+  </div>
+  </div>
+
+  <audio id="sonido" src=""></audio>
+
+  <div id="botones-inferiores">
+  <button id="salir">Salir</button>
+  <div id="boton-reintentar-container">
+  <button id="reintentar" disabled hidden>Reintentar</button>
+  <div id="reintentos-restantes">Intentos restantes: 5</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
