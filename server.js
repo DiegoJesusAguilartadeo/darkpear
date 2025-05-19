@@ -1,9 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+require("dotenv").config();
 const partidasRouter = require("./routes/partidas");
+const scoreRoutes = require('./routes/score');
+
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 // Middleware
 app.use(cors());
@@ -13,10 +17,10 @@ app.use(express.static(path.join(__dirname)));
 // Conexión a MySQL
 const mysql = require("mysql2");
 const conexion = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "admin",
-  database: "tragaperas"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 conexion.connect((err) => {
@@ -34,6 +38,7 @@ app.set("conexion", conexion);
 app.use(require("./routes/endpoints"));
 app.use(require("./routes/cuenta"));
 app.use(require("./routes/partidas"));
+app.use(require("./routes/score"));
 
 
 // Iniciar servidor

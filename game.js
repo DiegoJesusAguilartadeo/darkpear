@@ -288,17 +288,26 @@ function salirDelJuego() {
         })
         .then(res => res.json())
         .then(() => {
+            // Llama a la ruta /obt después de registrar la partida
+            return fetch("http://localhost:3000/obt", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            });
+        })
+        .then(() => {
             window.location.href = "home.html";
         })
         .catch(err => {
-            console.error("Error registrando al salir:", err);
+            console.error("Error al salir:", err);
             window.location.href = "home.html"; // Igual redirige
         });
     } else {
         window.location.href = "home.html";
     }
 }
-
 
 document.getElementById("salir").addEventListener("click", salirDelJuego);
 
