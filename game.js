@@ -64,16 +64,19 @@ function inicio() {
 }
 
 function Lanzar_inicio() {
+    const botonTirar = document.getElementById("tirar");
+
     if (reintentosDisponibles <= 0) {
         mostrar_mensaje("<b>No puedes jugar más</b><div class='subtitulo'>Has agotado tus intentos</div>");
         botonReintentar.hidden = false;
         botonReintentar.disabled = true;
         botonReintentar.innerText = "Sin intentos";
-        mostrarIntentos.innerText = `Intentos agotados`;
-        return; // Evita seguir
+        mostrarIntentos.innerText = "Intentos agotados";
+        return;
     }
 
-    if (credito >= 0) {
+    if (credito >= 0 && !activos) {
+        botonTirar.disabled = true; // 🔴 Deshabilita el botón
         sonar("lanzar.mp3");
         activos = true;
         numeros_actuales = [];
@@ -105,10 +108,12 @@ function Lanzar_inicio() {
                     probabilidad_ganar = probabilidad_maxima;
                 }
             }
-        }, 1000);
 
-        // 👇 Actualizamos contador local
-        
+            // ✅ Rehabilita el botón después de terminar todo
+            botonTirar.disabled = false;
+            activos = false;
+
+        }, 1000 + 600); // 1000ms delay del setTimeout + 600ms duración de animación
     }
 }
 

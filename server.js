@@ -39,6 +39,9 @@ app.use(require("./routes/endpoints"));
 app.use(require("./routes/cuenta"));
 app.use(require("./routes/partidas"));
 app.use(require("./routes/score"));
+require("./routes/recargar")(app);
+
+
 
 
 // Iniciar servidor
