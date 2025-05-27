@@ -34,31 +34,37 @@ router.post("/api/registro", (req, res) => {
   });
 });
 
+
+
 router.post("/api/login", (req, res) => {
   const conexion = req.app.get("conexion");
   const { username, password } = req.body;
 
-  const sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
+  const sql = "CALL iniciar_sesion(?, ?)";
   conexion.query(sql, [username, password], (err, results) => {
     if (err) {
       console.error("❌ Error en login:", err);
       return res.status(500).json({ message: "Error del servidor" });
     }
 
-    if (results.length === 0) {
+    const usuario = results[0][0]; // Primer usuario del primer conjunto de resultados
+
+    if (!usuario) {
       return res.status(401).json({ message: "Credenciales incorrectas" });
     }
 
-    const user = results[0];
     const token = jwt.sign(
-      { id: user.id, username: user.username },
-      process.env.JWT_SECRET, // ✅ Usa la clave segura del .env
+      { id: usuario.id, username: usuario.username },
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
     res.json({ token });
   });
 });
+
+module.exports = router;
+
 
 router.get("/verify", (req, res) => {
   const token = req.headers["authorization"]?.split(" ")[1];

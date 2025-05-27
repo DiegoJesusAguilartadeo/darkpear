@@ -2,15 +2,11 @@ const express = require("express");
 const path = require("path");
 const router = express.Router();
 
+// Ruta que llama al procedimiento almacenado "obtener_ranking"
 router.get("/api/ranking", (req, res) => {
   const conexion = req.app.get("conexion");
 
-  const sql = `
-    SELECT username, score, created_at 
-    FROM usuarios 
-    ORDER BY score DESC 
-    LIMIT 10
-  `;
+  const sql = "CALL obtener_ranking()"; // ← Llamada al procedimiento
 
   conexion.query(sql, (err, results) => {
     if (err) {
@@ -18,7 +14,7 @@ router.get("/api/ranking", (req, res) => {
       return res.status(500).json({ message: "Error al obtener el ranking" });
     }
 
-    res.json(results);
+    res.json(results[0]); // El resultado está en results[0]
   });
 });
 
@@ -28,4 +24,5 @@ router.get("/ranking", (req, res) => {
 });
 
 module.exports = router;
+
 
