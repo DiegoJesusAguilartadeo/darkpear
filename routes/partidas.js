@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require("./auth"); // Asegúrate de que esta ruta sea correcta
+require("dotenv").config();
+
 
 router.post("/registrar-partida", authMiddleware, (req, res) => {
   console.log("🔒 Usuario autenticado:", req.user);

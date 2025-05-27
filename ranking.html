@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ranking de Jugadores</title>
+</head>
+<body>
+  <h1>Top 10 Jugadores</h1>
+  <table border="1" width="50%">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Usuario</th>
+        <th>Puntuación</th>
+        <th>Fecha Registro</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-ranking">
+      <tr><td colspan="4">Cargando datos...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("http://localhost:3000/api/ranking")
+        .then(res => {
+          if (!res.ok) throw new Error("Error en la respuesta del servidor");
+          return res.json();
+        })
+        .then(data => {
+          const tbody = document.getElementById("tabla-ranking");
+          tbody.innerHTML = ""; // limpia "Cargando..."
+
+          if (!Array.isArray(data) || data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4">No hay datos de jugadores</td></tr>`;
+            return;
+          }
+
+          data.forEach((jugador, index) => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+              <td>${index + 1}</td>
+              <td>${jugador.username}</td>
+              <td>${jugador.score}</td>
+              <td>${new Date(jugador.created_at).toLocaleDateString()}</td>
+            `;
+            tbody.appendChild(fila);
+          });
+        })
+        .catch(err => {
+          console.error("❌ Error al cargar ranking:", err);
+          document.getElementById("tabla-ranking").innerHTML = `
+            <tr><td colspan="4">Error al cargar datos.</td></tr>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>
+

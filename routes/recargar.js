@@ -1,5 +1,7 @@
 // routes/recargar.js
 const cron = require("node-cron");
+require("dotenv").config();
+
 
 module.exports = function (app) {
   cron.schedule("* * * * *", () => {

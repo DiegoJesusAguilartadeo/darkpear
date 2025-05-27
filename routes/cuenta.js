@@ -1,5 +1,7 @@
 const express = require("express");
 const authMiddleware = require("./auth");
+require("dotenv").config();
+
 
 const router = express.Router();
 

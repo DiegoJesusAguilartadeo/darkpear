@@ -29,6 +29,8 @@
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="casinoMenu">
         <li><a class="dropdown-item" href="micuenta.html">🎯 My Account</a></li>
         <li><a class="dropdown-item" href="#" id="logoutDropdownBtn">🚪 Log Out</a></li>
+        <li><a class="dropdown-item" href="#" id="rankingbtn">Ranking</a></li>
+
         </ul>
         </li>
         </ul>
@@ -114,6 +116,12 @@
       localStorage.removeItem("token");
       window.location.href = "login.html";
     });
+
+
+              document.getElementById("rankingbtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.location.href = "ranking.html";
+          });
   </script>
 
   <!-- Bootstrap JS -->

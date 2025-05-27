@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require("./auth"); // Ajusta la ruta si el middleware está en otra carpeta
+require("dotenv").config();
+
 
 router.post("/obt", authMiddleware, (req, res) => {
   const userId = req.user.id;

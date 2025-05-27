@@ -2,8 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
+
+
+
+
 const partidasRouter = require("./routes/partidas");
 const scoreRoutes = require('./routes/score');
+const rankingRoutes = require("./routes/top");  // Ajusta ruta si es distinto
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -40,6 +46,10 @@ app.use(require("./routes/cuenta"));
 app.use(require("./routes/partidas"));
 app.use(require("./routes/score"));
 require("./routes/recargar")(app);
+app.use(rankingRoutes);
+
+
+
 
 
 

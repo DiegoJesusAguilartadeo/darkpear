@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+require("dotenv").config();
 
 router.post("/api/registro", (req, res) => {
   const conexion = req.app.get("conexion");
@@ -51,7 +52,7 @@ router.post("/api/login", (req, res) => {
     const user = results[0];
     const token = jwt.sign(
       { id: user.id, username: user.username },
-      "tu_clave_secreta",
+      process.env.JWT_SECRET, // ✅ Usa la clave segura del .env
       { expiresIn: "1h" }
     );
 
@@ -66,7 +67,7 @@ router.get("/verify", (req, res) => {
     return res.status(401).json({ message: "Token no proporcionado" });
   }
 
-  jwt.verify(token, "tu_clave_secreta", (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => { // ✅ Usa la clave del .env
     if (err) {
       return res.status(401).json({ message: "Token no válido" });
     }
@@ -76,6 +77,7 @@ router.get("/verify", (req, res) => {
 });
 
 module.exports = router;
+
 
 
 

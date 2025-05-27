@@ -1,3 +1,4 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 function authMiddleware(req, res, next) {
@@ -8,7 +9,7 @@ function authMiddleware(req, res, next) {
     return res.status(401).json({ message: "Token no proporcionado" });
   }
 
-  jwt.verify(token, "tu_clave_secreta", (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       console.log("🚫 Token inválido:", err.message);
       return res.status(401).json({ message: "Token no válido" });
@@ -21,4 +22,5 @@ function authMiddleware(req, res, next) {
 }
 
 module.exports = authMiddleware;
+
 
