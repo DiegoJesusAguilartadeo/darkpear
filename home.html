@@ -14,8 +14,7 @@
 </head>
 <body>
 
-  <!-- Navbar Bootstrap -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-crimson shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-crimson shadow">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">DarkPear.com</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -23,16 +22,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a href="micuenta.html" class="nav-link">My Account</a>
-          </li>
-          <li class="nav-item">
-            <button id="logoutBtn" class="btn btn-outline-light ms-2">Log Out</button>
-          </li>
+        <li class="nav-item dropdown">
+        <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center" type="button" id="casinoMenu" data-bs-toggle="dropdown" aria-expanded="false">
+        🎲 Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="casinoMenu">
+        <li><a class="dropdown-item" href="micuenta.html">🎯 My Account</a></li>
+        <li><a class="dropdown-item" href="#" id="logoutDropdownBtn">🚪 Log Out</a></li>
         </ul>
+        </li>
+        </ul>
+
       </div>
     </div>
   </nav>
+
 
   <!-- Bootstrap Carousel -->
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
@@ -41,7 +45,7 @@
         <img src="/img/casinoimg.jpg" class="d-block w-100" alt="Apuesta 1">
       </div>
       <div class="carousel-item">
-        <img src="/img/slotimg.jpg" class="d-block w-100" alt="Apuesta 2">
+        <img src="/img/slotimage.png" class="d-block w-100" alt="Apuesta 2">
       </div>
     </div>
 
@@ -106,7 +110,7 @@
       });
     }
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
+    document.getElementById("logoutDropdownBtn").addEventListener("click", () => {
       localStorage.removeItem("token");
       window.location.href = "login.html";
     });
