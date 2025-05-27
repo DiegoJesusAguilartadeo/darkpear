@@ -1,33 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const authMiddleware = require("./auth"); // Ajusta la ruta si el middleware está en otra carpeta
+const authMiddleware = require("./auth");
 require("dotenv").config();
-
 
 router.post("/obt", authMiddleware, (req, res) => {
   const userId = req.user.id;
   const conexion = req.app.get("conexion");
 
-  const obtenerPuntajeTotal = `
-    SELECT IFNULL(SUM(puntaje), 0) AS totalPuntos
-    FROM partidas
-    WHERE usuario_id = ?
-  `;
+  const query = "CALL actualizar_score_usuario(?)";
 
-  conexion.query(obtenerPuntajeTotal, [userId], (err, results) => {
-    if (err) return res.status(500).json({ error: "Error al obtener las puntuaciones" });
+  conexion.query(query, [userId], (err) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al actualizar el score" });
+    }
 
-    const total = results[0].totalPuntos;
+    // Luego de actualizar, obtener el nuevo score para mostrarlo al usuario
+    const obtenerScore = "SELECT score FROM usuarios WHERE id = ?";
+    conexion.query(obtenerScore, [userId], (err2, results) => {
+      if (err2) {
+        return res.status(500).json({ error: "Error al obtener el score actualizado" });
+      }
 
-    const actualizarScore = `
-      UPDATE usuarios SET score = ? WHERE id = ?
-    `;
-    conexion.query(actualizarScore, [total, userId], (err2) => {
-      if (err2) return res.status(500).json({ error: "Error al actualizar el score" });
-
-      res.json({ mensaje: "Score actualizado correctamente", score: total });
+      res.json({ mensaje: "Score actualizado correctamente", score: results[0].score });
     });
   });
 });
 
 module.exports = router;
+

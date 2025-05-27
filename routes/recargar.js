@@ -1,26 +1,21 @@
-// routes/recargar.js
 const cron = require("node-cron");
 require("dotenv").config();
-
 
 module.exports = function (app) {
   cron.schedule("* * * * *", () => {
     console.log("🕒 Verificando para restablecer intentos...");
 
-    const conexion = app.get("conexion"); // 💥 Este es el que estaba fallando antes
+    const conexion = app.get("conexion");
 
-    const query = `
-      UPDATE usuarios
-      SET intentos_disponibles = LEAST(intentos_disponibles + 1, 5)
-      WHERE intentos_disponibles < 5
-    `;
+    const query = "CALL actualizar_intentos()";
 
     conexion.query(query, (error, results) => {
       if (error) {
-        console.error("❌ Error al actualizar los intentos:", error);
+        console.error("❌ Error al ejecutar el procedimiento:", error);
       } else {
-        console.log(`✅ Intentos actualizados: ${results.affectedRows}`);
+        console.log("✅ Procedimiento ejecutado correctamente.");
       }
     });
   });
 };
+

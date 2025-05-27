@@ -5,25 +5,37 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <form id="loginForm">
-    <img src="img/6681204.png" alt="user-img" />
-    
-    <label for="username">Usuario</label>
-    <input type="text" id="username" placeholder="Ejemplo" required />
-    
-    <label for="password">Contraseña</label>
-    <input type="password" id="password" placeholder="Contraseña" required />
-    
-    <div class="box-visible">
-      <input type="checkbox" id="visible" />
-      <label for="visible">Mostrar Contraseña</label>
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+
+  <form id="loginForm" class="p-4 shadow-lg bg-white rounded">
+    <img src="img/perita3.png" alt="user-img" />
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Usuario</label>
+      <input type="text" id="username" class="form-control" placeholder="Usuario" required />
     </div>
-    
-    <button type="submit" id="submit">Iniciar Sesión</button>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" id="password" class="form-control" placeholder="Contraseña" required />
+    </div>
+
+<div class="form-check d-flex align-items-center gap-2 w-100">
+  <input class="form-check-input" type="checkbox" id="visible">
+  <label class="form-check-label" for="visible">Mostrar Contraseña</label>
+</div>
+
+
+    <button type="submit" id="submit" class="btn btn-crimson w-100">Iniciar Sesión</button>
+
+    <p class="text-center mt-3"><a href="#" class="text-crimson">¿Olvidaste tu contraseña?</a></p>
   </form>
+
+
 
   <script>
     // Mostrar u ocultar contraseña
@@ -40,7 +52,7 @@
       const password = document.getElementById("password").value;
 
       try {
-        const res = await fetch("http://localhost:3000/api/login", { // Cambié a /api/login 
+        const res = await fetch("http://localhost:3000/api/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password })
@@ -57,9 +69,11 @@
         }
       } catch (error) {
         console.error(error);
-        alert("Error de inicio de sesion");
+        alert("Error de inicio de sesión");
       }
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

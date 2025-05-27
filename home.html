@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styleshome.css">
   <!-- Fuente Pacifico -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -30,6 +31,10 @@
         <li><a class="dropdown-item" href="micuenta.html">🎯 My Account</a></li>
         <li><a class="dropdown-item" href="#" id="logoutDropdownBtn">🚪 Log Out</a></li>
         <li><a class="dropdown-item" href="#" id="rankingbtn">Ranking</a></li>
+        <li><a class="dropdown-item" href="#" id="toggleTheme">🌞 Modo Claro</a></li>
+
+
+
 
         </ul>
         </li>
@@ -44,10 +49,13 @@
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="/img/casinoimg.jpg" class="d-block w-100" alt="Apuesta 1">
+        <img src="/img/car1img.png" class="d-block w-100" alt="Apuesta 1">
       </div>
       <div class="carousel-item">
         <img src="/img/slotimage.png" class="d-block w-100" alt="Apuesta 2">
+      </div>
+            <div class="carousel-item">
+        <img src="/img/timetoplay.png" class="d-block w-100" alt="Apuesta 2">
       </div>
     </div>
 
@@ -70,61 +78,88 @@
   </section>
 
   <!-- Scripts -->
-  <script>
-    const token = localStorage.getItem("token");
+ <script>
+  const token = localStorage.getItem("token");
 
-    if (!token) {
-      alert("No estás autenticado. Redirigiendo al login...");
-      window.location.href = "login.html";
-    } else {
-      fetch("http://localhost:3000/verify", {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.valid) {
-          document.getElementById("welcome").innerHTML = `
-   <a href="#" id="btnIrAlJuego" class="btn btn-pear btn-lg">
-  Jugar
-</a>
+  if (!token) {
+    alert("No estás autenticado. Redirigiendo al login...");
+    window.location.href = "login.html";
+  } else {
+    fetch("http://localhost:3000/verify", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.valid) {
+        document.getElementById("welcome").innerHTML = `
+          <a href="#" id="btnIrAlJuego" class="btn-pear">
+            Jugar
+          </a>
+        `;
 
-          `;
+        document.getElementById("btnIrAlJuego").addEventListener("click", function(event) {
+          event.preventDefault();
+          window.location.href = "index.html";
+        });
 
-          document.getElementById("btnIrAlJuego").addEventListener("click", function(event) {
-            event.preventDefault();
-            window.location.href = "index.html";
-          });
-
-        } else {
-          alert("El token no es válido. Redirigiendo al login...");
-          localStorage.removeItem("token");
-          window.location.href = "login.html";
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert("Error al verificar el token.");
+      } else {
+        alert("El token no es válido. Redirigiendo al login...");
         localStorage.removeItem("token");
         window.location.href = "login.html";
-      });
-    }
-
-    document.getElementById("logoutDropdownBtn").addEventListener("click", () => {
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      alert("Error al verificar el token.");
       localStorage.removeItem("token");
       window.location.href = "login.html";
     });
+  }
 
+  document.getElementById("logoutDropdownBtn").addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+  });
 
-              document.getElementById("rankingbtn").addEventListener("click", function(event) {
-            event.preventDefault();
-            window.location.href = "ranking.html";
-          });
-  </script>
+  document.getElementById("rankingbtn").addEventListener("click", function(event) {
+    event.preventDefault();
+    window.location.href = "ranking.html";
+  });
+
+  // 🌞 Tema claro/oscuro
+  const themeBtn = document.getElementById("toggleTheme");
+
+  function setTheme(isLight) {
+    if (isLight) {
+      document.documentElement.setAttribute("data-theme", "light");
+      themeBtn.textContent = "🌙 Modo Oscuro";
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      themeBtn.textContent = "🌞 Modo Claro";
+    }
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  }
+
+  const savedTheme = localStorage.getItem("theme");
+  setTheme(savedTheme === "light");
+
+  themeBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const isLight = document.documentElement.getAttribute("data-theme") !== "light";
+    setTheme(isLight);
+  });
+</script>
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="footer">
+  &copy; 2025 Dark-pear - Todos los derechos reservados
+</footer>
+
 </body>
 </html>
+
