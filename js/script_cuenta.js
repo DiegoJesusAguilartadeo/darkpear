@@ -2,7 +2,8 @@
     // Aplicar modo claro si está activado
     const temaGuardado = localStorage.getItem("theme");
     if (temaGuardado === "light") {
-      document.body.classList.add("light-mode");
+document.documentElement.setAttribute("data-theme", "light");
+
     }
 
     // Obtener datos de cuenta

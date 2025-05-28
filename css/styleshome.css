@@ -19,11 +19,11 @@
 
 /* LIGHT MODE */
 [data-theme="light"] {
-  --color1: #1c1c1c;
-  --color2: #f2ccff;
+  --color1: #ffffff;/*carousel*/
+  --color2: #f2ccff;/*body*/
   --color3: #99ffe6	; /*letra del navbar y footer*/
-  --color4: #656565;
-  --color5: #ffffff;
+  --color4: #342163;
+  --color5: #787878;/*header de cuenta y hero*/
   --color6: #ff8f00;/*boton jugar*/
   --color7: #ff6f00;/*boton jugar*/
   --color8: #ffff99	;//*navbar*/
@@ -408,18 +408,6 @@ body {
 }
 
 
-/* Light mode override */
-body.light-mode {
-  --color1: #000000;
-  --color2: #d81b60;   /* Rosado fuerte */
-  --color3: #fff9c4;   /* Amarillo claro */
-  --color4: #999;
-  --color5: #f5f5f5;
-  --color6: #ffa000;
-  --color7: #fb8c00;
-  background-color: var(--color5);
-  color: var(--color1);
-}
 
 /* Tarjetas y elementos */
 body.light-mode .card,
@@ -469,4 +457,3 @@ body.light-mode {
 .text-acento {
   color: var(--color3);
 }
-

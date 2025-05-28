@@ -134,7 +134,7 @@ function mostrar_imagen(num, imagen) {
     // Retardo escalonado: 0ms, 200ms, 400ms para cada imagen
     setTimeout(() => {
         img.classList.add("girando");
-        img.src = "img/" + imagen;
+        img.src = "/img/" + imagen;
 
         // Quitar la animación después de que termine (coincide con duración CSS)
         setTimeout(() => {
@@ -150,7 +150,7 @@ function comparar() {
         let premio = premios_por_imagen[img] || 0;
         let mensaje = `¡Has ganado ${premio} monedas!<div>`;
         for (let k = 0; k < premio; k++) {
-            mensaje += `<img src="img/coin.png">`;
+            mensaje += `<img src="/img/coin.png">`;
         }
         mensaje += `</div>`;
         generarMonedasAnimadas(premio);
@@ -180,7 +180,7 @@ function actualizar() {
     document.getElementById("puntaje").innerHTML = puntaje;
     document.getElementById("monedas").innerHTML = "";
     for (let k = 1; k <= credito; k++) {
-        document.getElementById("monedas").innerHTML += `<img src="img/coin.png">`;
+        document.getElementById("monedas").innerHTML += `<img src="/img/coin.png">`;
     }
 
     // ✅ Nuevo: Solo descuenta el intento cuando el crédito llegue a 0
