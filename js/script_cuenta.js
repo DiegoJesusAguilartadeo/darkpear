@@ -8,7 +8,7 @@ document.documentElement.setAttribute("data-theme", "light");
 
     // Obtener datos de cuenta
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3000/api/cuenta", {
+fetch("/api/cuenta", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`

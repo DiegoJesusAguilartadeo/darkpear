@@ -2,7 +2,7 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       // Obtener el ranking
-      fetch("http://localhost:3000/api/ranking")
+fetch("/api/ranking")
         .then(res => {
           if (!res.ok) throw new Error("Error en la respuesta del servidor");
           return res.json();

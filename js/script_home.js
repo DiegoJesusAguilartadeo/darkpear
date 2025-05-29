@@ -4,7 +4,7 @@ if (!token) {
   alert("No estás autenticado. Redirigiendo al login...");
   window.location.href = "/html/login.html";
 } else {
-  fetch("http://localhost:3000/verify", {
+fetch("/verify", {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`

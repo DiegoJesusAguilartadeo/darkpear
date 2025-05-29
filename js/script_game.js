@@ -39,7 +39,7 @@ function inicio() {
     au = document.getElementById("sonido");
 
     // Obtener intentos disponibles del servidor
-    fetch("http://localhost:3000/api/cuenta", {
+fetch("/api/cuenta", {
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
@@ -188,7 +188,7 @@ function actualizar() {
         reintentosDisponibles--;
         mostrarIntentos.innerText = `Intentos restantes: ${reintentosDisponibles}`;
 
-        fetch("http://localhost:3000/registrar-partida", {
+fetch("/registrar-partida", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -210,7 +210,7 @@ function actualizar() {
                 mostrarIntentos.innerText = `Intentos agotados`;
             } else {
                 // Actualiza desde el backend
-                fetch("http://localhost:3000/api/cuenta", {
+            fetch("/api/cuenta", {
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
                     }
@@ -280,7 +280,7 @@ botonReintentar.addEventListener("click", () => {
 function salirDelJuego() {
     // Solo registrar si hay algo que guardar
     if (credito < 5 || puntaje > 0) {
-        fetch("http://localhost:3000/registrar-partida", {
+fetch("/registrar-partida", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
