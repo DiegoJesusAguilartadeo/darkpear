@@ -17,26 +17,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-crimson shadow">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">DarkPear.com</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+    <!-- Botón burger -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+
+    <!-- Enlaces del menú -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
-          <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center" type="button" id="casinoMenu" data-bs-toggle="dropdown" aria-expanded="false">
-            🎲 Menu
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="casinoMenu">
-            <li><a class="dropdown-item" href="/html/account.html">🎯 My Account</a></li>
-            <li><a class="dropdown-item" href="#" id="logoutDropdownBtn">🚪 Log Out</a></li>
-            <li><a class="dropdown-item" href="#" id="rankingbtn">Ranking</a></li>
-            <li><a class="dropdown-item" href="#" id="toggleTheme">🌞 Modo Claro</a></li>
-          </ul>
-        </li>
-      </ul>
+  <li class="nav-item me-2">
+    <a href="/html/account.html" class="nav-link btn btn-sm btn-outline-light">My Account</a>
+  </li>
+  <li class="nav-item me-2">
+    <a href="#" id="logoutDropdownBtn" class="nav-link btn btn-sm btn-outline-light">Log Out</a>
+  </li>
+  <li class="nav-item me-2">
+    <a href="#" id="rankingbtn" class="nav-link btn btn-sm btn-outline-light"> Ranking</a>
+  </li>
+  <li class="nav-item">
+    <a href="#" id="toggleTheme" class="nav-link btn btn-sm btn-outline-light">Modo Claro</a>
+  </li>
+</ul>
+
     </div>
   </div>
 </nav>
+
+
+
 
 <!-- Bootstrap Carousel -->
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">

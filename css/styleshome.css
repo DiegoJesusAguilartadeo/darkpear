@@ -7,12 +7,11 @@
   /* DARK MODE por defecto */
   --color1: #ffffff;
   --color2: #444;
-  --color3: #ff9999; /*letra del navbar y footer*/
+  --color3: #ffe28a; /*letra del navbar y footer*/
   --color4: #656565;
   --color5: #1c1c1c;
-  --color6: #ff8f00;/*boton jugar*/
-  --color7: #ff6f00;/*boton jugar*/
-  --color8:    #ffff99		//*navbar*/
+  --color6: #f4c542;/*boton jugar*/
+  --color8:   #ffff99		//*navbar*/
 	;
 
 }
@@ -20,13 +19,12 @@
 /* LIGHT MODE */
 [data-theme="light"] {
   --color1: #ffffff;/*carousel*/
-  --color2: #f2ccff;/*body*/
-  --color3: #99ffe6	; /*letra del navbar y footer*/
+  --color2: #ffffff;/*body*/
+  --color3:   #ffe28a; /*letra del navbar y footer*/
   --color4: #342163;
-  --color5: #787878;/*header de cuenta y hero*/
-  --color6: #ff8f00;/*boton jugar*/
-  --color7: #ff6f00;/*boton jugar*/
-  --color8: #ffff99	;//*navbar*/
+  --color5: #40E0D0;/*header de cuenta y hero*/
+  --color6: #2563EB;/*boton jugar*/
+  --color8: #2563EB	;//*navbar*/
 
 	
 
@@ -334,32 +332,8 @@ body {
   transform: rotate(45deg);
 }
 
-/* Botón principal */
-.btn-outline-crimson {
-  width: 100%;
-  background-color: var(--color3);
-  border: none;
-  padding: 12px 0;
-  font-weight: 700;
-  font-size: 1.1rem;
-  border-radius: 30px;
-  color: var(--color5);
-  box-shadow: 0 6px 12px rgba(144, 238, 144, 0.5);
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
 
-.btn-outline-crimson:hover,
-.btn-outline-crimson:focus {
-  background-color: var(--color4);
-  color: var(--color1);
-  box-shadow: 0 8px 15px rgba(118, 199, 118, 0.7);
-}
 
-.btn-outline-crimson:active {
-  background-color: #4caf50;
-  color: var(--color1);
-}
 
 /* Responsive */
 @media (max-width: 420px) {
@@ -371,29 +345,7 @@ body {
     padding: 20px;
   }
 }
-.btn-pear {
-  background-color: var(--color6);
-  color: white;
-  font-weight: 700;
-  border-radius: 30px;
-  padding: 14px 40px;
-  font-size: 1.25rem;
-  border: none;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  box-shadow: none;
-  text-shadow: none;
-}
 
-.btn-pear:hover,
-.btn-pear:focus {
-  background-color: var(--color7);
-  transform: scale(1.05);
-  outline: none;
-}
 .footer {
   width: 100%;
   background-color: var(--color3); /* negro o tu color de fondo */
@@ -433,7 +385,6 @@ body.light-mode {
   color: var(--color5);
 }
 
-/* Botón personalizado */
 .btn-pear {
   background-color: var(--color6);
   color: white;
@@ -443,17 +394,21 @@ body.light-mode {
   font-size: 1.25rem;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.1s ease, transform 0.1s ease;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  text-decoration: none;   
 }
 
-.btn-pear:hover {
-  background-color: var(--color7);
-  transform: scale(1.05);
-}
 
 /* Color acento */
 .text-acento {
   color: var(--color3);
 }
+.nav-link:hover {
+  color: var(--color3) !important;
+}
+
+
+
+

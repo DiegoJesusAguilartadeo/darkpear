@@ -56,10 +56,10 @@ const themeBtn = document.getElementById("toggleTheme");
 function setTheme(isLight) {
   if (isLight) {
     document.documentElement.setAttribute("data-theme", "light");
-    themeBtn.textContent = "🌙 Modo Oscuro";
+    themeBtn.textContent = " Modo Oscuro";
   } else {
     document.documentElement.removeAttribute("data-theme");
-    themeBtn.textContent = "🌞 Modo Claro";
+    themeBtn.textContent = " Modo Claro";
   }
   localStorage.setItem("theme", isLight ? "light" : "dark");
 }
