@@ -183,7 +183,7 @@ function actualizar() {
         document.getElementById("monedas").innerHTML += `<img src="/img/coin.png">`;
     }
 
-    // ✅ Nuevo: Solo descuenta el intento cuando el crédito llegue a 0
+    // : Solo descuenta el intento cuando el crédito llegue a 0
     if (credito === 0) {
         reintentosDisponibles--;
         mostrarIntentos.innerText = `Intentos restantes: ${reintentosDisponibles}`;

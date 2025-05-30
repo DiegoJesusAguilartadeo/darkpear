@@ -27,27 +27,27 @@ fetch("/verify", {
     } else {
       alert("El token no es válido. Redirigiendo al login...");
       localStorage.removeItem("token");
-      window.location.href = "/html/login.html";
+      window.location.href = "/login.html";
     }
   })
   .catch(error => {
     console.error(error);
     alert("Error al verificar el token.");
     localStorage.removeItem("token");
-    window.location.href = "/html/login.html";
+    window.location.href = "/login.html";
   });
 }
 
 // Log Out
 document.getElementById("logoutDropdownBtn").addEventListener("click", () => {
   localStorage.removeItem("token");
-  window.location.href = "/html/index.html";
+  window.location.href = "/index.html";
 });
 
 // Ranking
 document.getElementById("rankingbtn").addEventListener("click", function(event) {
   event.preventDefault();
-  window.location.href = "/html/ranking.html";
+  window.location.href = "/ranking.html";
 });
 
 // 🌞 Tema claro/oscuro
