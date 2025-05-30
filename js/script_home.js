@@ -21,7 +21,7 @@ fetch("/verify", {
 
       document.getElementById("btnIrAlJuego").addEventListener("click", function(event) {
         event.preventDefault();
-        window.location.href = "/html/game.html"; // apuntando al archivo correcto
+        window.location.href = "/game.html"; // apuntando al archivo correcto
       });
 
     } else {
