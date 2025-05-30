@@ -19,6 +19,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "html")));
+// HTML principal
+
+// JS y CSS externos
+app.use("/js", express.static(path.join(__dirname, "js")));
+app.use("/css", express.static(path.join(__dirname, "css")));
+
 
 // Conexión a MySQL
 const mysql = require("mysql2");
