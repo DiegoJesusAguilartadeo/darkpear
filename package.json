@@ -1,13 +1,13 @@
 {
   "name": "tragaperas-responsiveconexion",
   "version": "1.0.0",
-  "description": "API de tragaperras con Express y MySQL",
+  "description": "Proyecto tragaperras con conexión a MySQL y funcionalidades backend.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Aguilar_Tepas",
-  "license": "ISC",
+  "author": "Arias-Aguilar",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -18,3 +18,4 @@
     "node-cron": "^4.0.7"
   }
 }
+
