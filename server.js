@@ -21,9 +21,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "html")));
 // HTML principal
 
-// JS y CSS externos
+// JS y CSS img
 app.use("/js", express.static(path.join(__dirname, "js")));
 app.use("/css", express.static(path.join(__dirname, "css")));
+app.use("/img", express.static(path.join(__dirname, "img")));
+
 
 
 // Conexión a MySQL
