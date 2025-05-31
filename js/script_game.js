@@ -294,7 +294,7 @@ fetch("/registrar-partida", {
         .then(res => res.json())
         .then(() => {
             // Llama a la ruta /obt después de registrar la partida
-            return fetch("http://localhost:3000/obt", {
+            return fetch("/obt", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
