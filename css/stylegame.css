@@ -513,7 +513,7 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  background-image: url("img/coin.png");
+  background-image: url("/img/coin.png");
   background-size: cover;
   animation: caer 1.2s ease-out forwards;
 }
