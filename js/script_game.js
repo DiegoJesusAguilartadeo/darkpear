@@ -6,26 +6,26 @@ const mostrarIntentos = document.getElementById("reintentos-restantes");
 var credito = 5;
 var puntaje = 0;
 var probabilidad_ganar = 0.1; // 10% al inicio
-var aumento_por_fallo = 0.08; // aumenta 8% por cada pérdida
+var aumento_por_fallo = 0.05; // aumenta 5% por cada pérdida
 var probabilidad_maxima = 0.5; // no sobrepasa 50%
 
 var imagenes_sesgadas = [
-    "casino-chip.png", "casino-chip.png", "casino-chip.png", "casino-chip.png",
-    "cherries.png", "cherries.png", "cherries.png",
-    "casino-chips.png", "casino-chips.png",
-    "card-game.png", "card-game.png",
+    "papum.png", "papum.png", "papum.png", "papum.png",
+    "boomerang.png", "boomerang.png", "boomerang.png",
+    "pera pvz.png", "pera pvz.png",
+    "cereza.png", "cereza.png",
     "bonus.png", "bonus.png",
     "seven.png", "seven.png",
     "cancelar.png"
 ];
 
 var premios_por_imagen = {
-    "casino-chip.png": 1,
-    "cherries.png": 2,
-    "casino-chips.png": 3,
-    "card-game.png": 4,
-    "bonus.png": 7,
-    "seven.png": 9,
+    "papum.png": 1,
+    "boomerang.png": 2,
+    "pera pvz.png": 2,
+    "cereza.png": 3,
+    "bonus.png": 4,
+    "seven.png": 5,
     "cancelar.png": 0
 };
 
@@ -39,7 +39,7 @@ function inicio() {
     au = document.getElementById("sonido");
 
     // Obtener intentos disponibles del servidor
-fetch("/api/cuenta", {
+    fetch("/api/cuenta", {
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
@@ -72,49 +72,60 @@ function Lanzar_inicio() {
         botonReintentar.disabled = true;
         botonReintentar.innerText = "Sin intentos";
         mostrarIntentos.innerText = "Intentos agotados";
+        botonTirar.hidden = true; // Oculta el botón de tirar si no hay intentos
         return;
     }
 
-    if (credito >= 0 && !activos) {
-        botonTirar.disabled = true; // 🔴 Deshabilita el botón
-        sonar("lanzar.mp3");
-        activos = true;
-        numeros_actuales = [];
-
-        let hubo_ganador = false;
-
-        if (Math.random() < probabilidad_ganar) {
-            let opciones_comunes = ["casino-chip.png", "cherries.png", "casino-chips.png", "card-game.png"];
-            let img = opciones_comunes[Math.floor(Math.random() * opciones_comunes.length)];
-            numeros_actuales = [img, img, img];
-            hubo_ganador = true;
-        } else {
-            for (let k = 0; k < 3; k++) {
-                let img = escoger_imagen();
-                numeros_actuales.push(img);
-            }
-        }
-
-        for (let k = 0; k < 3; k++) {
-            mostrar_imagen(k, numeros_actuales[k]);
-        }
-
-        setTimeout(() => {
-            if (comparar()) {
-                probabilidad_ganar = 0.1;
-            } else {
-                probabilidad_ganar += aumento_por_fallo;
-                if (probabilidad_ganar > probabilidad_maxima) {
-                    probabilidad_ganar = probabilidad_maxima;
-                }
-            }
-
-            // ✅ Rehabilita el botón después de terminar todo
-            botonTirar.disabled = false;
-            activos = false;
-
-        }, 1000 + 600); // 1000ms delay del setTimeout + 600ms duración de animación
+    // 🚫 Nueva validación para evitar crédito negativo o múltiples tiradas
+    if (credito <= 0 || activos) {
+        botonTirar.disabled = true;
+        return;
     }
+
+    botonTirar.disabled = true;
+    sonar("Lanzar.mp3");
+    activos = true;
+    numeros_actuales = [];
+
+    let hubo_ganador = false;
+
+    if (Math.random() < probabilidad_ganar) {
+        let opciones_comunes = ["papum.png", "boomerang.png", "pera pvz.png"];
+        let img = opciones_comunes[Math.floor(Math.random() * opciones_comunes.length)];
+        numeros_actuales = [img, img, img];
+        hubo_ganador = true;
+    } else {
+        for (let k = 0; k < 3; k++) {
+            let img = escoger_imagen();
+            numeros_actuales.push(img);
+        }
+    }
+
+    for (let k = 0; k < 3; k++) {
+        mostrar_imagen(k, numeros_actuales[k]);
+    }
+
+    setTimeout(() => {
+        if (comparar()) {
+            probabilidad_ganar = 0.1;
+        } else {
+            probabilidad_ganar += aumento_por_fallo;
+            if (probabilidad_ganar > probabilidad_maxima) {
+                probabilidad_ganar = probabilidad_maxima;
+            }
+        }
+
+        // ✅ Rehabilita el botón después de terminar todo
+        botonTirar.disabled = false;
+
+        // Oculta el botón si ya no hay crédito
+        if (credito <= 0) {
+            botonTirar.hidden = true;
+        }
+
+        activos = false;
+
+    }, 1000 + 600);
 }
 
 
@@ -134,7 +145,7 @@ function mostrar_imagen(num, imagen) {
     // Retardo escalonado: 0ms, 200ms, 400ms para cada imagen
     setTimeout(() => {
         img.classList.add("girando");
-        img.src = "/img/" + imagen;
+        img.src = "img/" + imagen;
 
         // Quitar la animación después de que termine (coincide con duración CSS)
         setTimeout(() => {
@@ -144,30 +155,52 @@ function mostrar_imagen(num, imagen) {
 }
 
 function comparar() {
-    if (numeros_actuales[0] === numeros_actuales[1] && numeros_actuales[1] === numeros_actuales[2]) {
+    // 🚫 Validación reforzada para evitar restar crédito si ya no hay
+    if (credito <= 0) {
+        mostrar_mensaje("<b>Sin crédito</b><div class='subtitulo'>No puedes jugar sin monedas</div>");
+        document.getElementById("tirar").hidden = true;
+        return false;
+    }
+
+    if (
+        numeros_actuales[0] === numeros_actuales[1] &&
+        numeros_actuales[1] === numeros_actuales[2]
+    ) {
         activos = false;
         let img = numeros_actuales[0];
         let premio = premios_por_imagen[img] || 0;
         let mensaje = `¡Has ganado ${premio} monedas!<div>`;
         for (let k = 0; k < premio; k++) {
-            mensaje += `<img src="/img/coin.png">`;
+            mensaje += `<img src="img/coin.png">`;
         }
         mensaje += `</div>`;
         generarMonedasAnimadas(premio);
         mostrar_mensaje(mensaje);
         sonar("ganar.mp3");
         credito += premio;
-        
+
         puntaje += premio;
-        credito--; // costo de tirada
+
+        // ✅ Validación antes de restar el crédito
+        if (credito > 0) {
+            credito--; // costo de tirada
+           
+        }
+
         actualizar();
         return true;
     }
 
-    credito--; // costo de tirada
+    // ✅ Validación antes de restar el crédito en caso de perder
+    if (credito > 0) {
+        credito--; // costo de tirada
+        
+    }
+
     actualizar();
     return false;
 }
+
 
 function actualizar() {
     document.getElementById("dinero").innerHTML = credito;
@@ -180,15 +213,19 @@ function actualizar() {
     document.getElementById("puntaje").innerHTML = puntaje;
     document.getElementById("monedas").innerHTML = "";
     for (let k = 1; k <= credito; k++) {
-        document.getElementById("monedas").innerHTML += `<img src="/img/coin.png">`;
+        document.getElementById("monedas").innerHTML += `<img src="img/coin.png">`;
     }
 
-    // : Solo descuenta el intento cuando el crédito llegue a 0
+    // ✅ Nuevo: Solo descuenta el intento cuando el crédito llegue a 0
     if (credito === 0) {
+         sonar("perder.mp3");
+         mostrar_mensaje("<b>Has perdido todas tus monedas</b><div class='subtitulo'>Se descontará un intento</div>");
+
+
         reintentosDisponibles--;
         mostrarIntentos.innerText = `Intentos restantes: ${reintentosDisponibles}`;
 
-fetch("/registrar-partida", {
+        fetch("/registrar-partida", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -210,7 +247,7 @@ fetch("/registrar-partida", {
                 mostrarIntentos.innerText = `Intentos agotados`;
             } else {
                 // Actualiza desde el backend
-            fetch("/api/cuenta", {
+                fetch("/api/cuenta", {
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
                     }
@@ -250,7 +287,7 @@ function cerrar() {
 }
 
 function sonar(audio) {
-    au.src = "audios/" + audio;
+    au.src = "audio/" + audio;
     au.play();
 }
 
@@ -280,7 +317,7 @@ botonReintentar.addEventListener("click", () => {
 function salirDelJuego() {
     // Solo registrar si hay algo que guardar
     if (credito < 5 || puntaje > 0) {
-fetch("/registrar-partida", {
+        fetch("/registrar-partida", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

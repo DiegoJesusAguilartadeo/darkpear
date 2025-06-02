@@ -4,7 +4,7 @@
   }
   
   body {
-    background-image: url('/img/casino.jpg');
+    background-image: url('img/fondogreen.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -63,61 +63,111 @@
   color: #ffd700;
   text-shadow: 0 0 5px #ffd700, 0 0 10px #fff;
 }
+
+#tirar {
+  position: absolute;
+  top: 48%; /* justo debajo de la imagen */
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 58%; /* proporcional al ancho de la máquina */
+  height: 37px;
+  font-size: 1.2em;
+
+  background: linear-gradient(to bottom, #ff0033, #cc0000);
+  border: 4px solid gold;
+  border-radius: 12px;
+  box-shadow:
+    0 0 20px red,
+    0 0 40px gold,
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: casinoGlow 2s infinite alternate;
   
-  #tirar {
-    width: 125px;
-    height: 125px;
-    background-color: #fff0c9;
-    border-radius: 50%;
-    border: 5px solid crimson;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5em;
-    box-shadow: 0 0 13px black inset;
-    cursor: pointer;
-    margin: 0.5rem auto 1rem auto;
-    transition: transform 0.2s ease;
+}
+
+@keyframes casinoGlow {
+  0% {
+    box-shadow:
+      0 0 10px red,
+      0 0 20px gold,
+      inset 0 0 5px rgba(255, 255, 255, 0.2);
   }
-  
+  100% {
+    box-shadow:
+      0 0 20px red,
+      0 0 50px gold,
+      inset 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+}
+
   #tirar:hover, .boton:hover {
-    background-color: white;
+  background-color: rgb(18, 210, 14);
   box-shadow: 0 0 13px crimson inset;
-  transform: scale(1.05);
-  }
   
+}
   header {
     position: relative;
     text-align: center;
   }
   
-  /* Ventanas del juego */
-  #ventanas {
-    display: flex;
-    justify-content: center;
-    gap: 2rem; /* más juntas */
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .ventana {
-    flex: 0 1 auto;
-    width: 170px;
-   
-  }
-  
-  .imagen {
-    border: 4px solid crimson;
-    border-radius: 15px;
-    padding: 10px;
-    background-color: #fff8e1;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    height: 150px; /* o 200px, ajusta al gusto */
-  }
+#ventanas {
+  position: absolute;
+  top: 15%;                /* Ajusta para alinear verticalmente con las ranuras */
+  left: 50%;               /* Centra horizontalmente */
+  transform: translateX(-50%);
+  width: 68%;              /* Proporcional al contenedor de la máquina */
+  height: auto;            /* Altura automática */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1%;                 /* Espaciado entre las ventanas proporcional */
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.ventana {
+  flex: 1;
+  max-width: 33%; /* evita que crezca demasiado */
+  aspect-ratio: 1 / 1.45;
+  background: rgb(44, 41, 41);
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.imagen {
+  width: 100%;
+  height: 100%;
+  padding: 4%;
+  border: 3px solid gold;
+  border-radius: 12px;
+  background-color: transparent;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6), 0 0 12px rgba(255, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ventana img {
+  width: 100%;
+  height: auto;
+}
+
+.imagen:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 40px rgba(255, 0, 0, 0.4);
+}
+
   
   .imagen img {
   width: auto;
@@ -210,11 +260,7 @@
   
   /* Media Queries para pantallas pequeñas */
   @media (max-width: 768px) {
-    #tirar {
-      width: 120px;
-      height: 120px;
-      font-size: 2.5em;
-    }
+
   
     #dinero {
       font-size: 2.5em;
@@ -228,58 +274,45 @@
       font-size: 1.2em;
     }
   }
-  
-  @media (max-width: 480px) {
-    #tirar {
-      width: 100px;
-      height: 100px;
-      font-size: 2em;
-
-      
-    }
-
     
-  
-    .ventana {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
-  
-    #ventanas {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    #lineal {
-      justify-content: center;
-      text-align: center;
-    }
-  }
-  
   #info-top {
     display: flex;
     justify-content: space-between; /* izquierda y derecha */
     align-items: flex-start;
     padding: 10px 20px;
     border-radius: 0 0 10px 10px;
-    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    
     flex-wrap: wrap;
     font-family: 'Pacifico', cursive;
   }
   
-  #credito-container {
+#credito-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, #1c1c1c 0%, #000 100%);
+  background: radial-gradient(circle, #014d01 0%, #001f00 100%);
   border: 3px solid gold;
   border-radius: 12px;
   padding: 10px 20px;
   box-shadow: 0 0 10px gold, 0 0 5px #ffd700;
   font-family: 'Orbitron', sans-serif;
-  animation: brilloCasino 3s infinite;
+  animation: brilloCasinoVerde 3s infinite;
   margin-bottom: 15px;
 }
+
+/* Animación con tonos verdes */
+@keyframes brilloCasinoVerde {
+  0% {
+    box-shadow: 0 0 8px #00ff66, 0 0 5px gold;
+  }
+  50% {
+    box-shadow: 0 0 14px #00ff99, 0 0 10px gold;
+  }
+  100% {
+    box-shadow: 0 0 8px #00ff66, 0 0 5px gold;
+  }
+}
+
   
   #credito-container #dinero {
     color: green;
@@ -292,37 +325,60 @@
     color: #555;
   }
   
+#puntos-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #004d00, #002200); /* Verde profundo con luz */
+  padding: 12px 24px;
+  border: 2px solid #ffd700; /* Dorado brillante */
+  border-radius: 12px;
+  font-size: 1.3em;
+  color: #ffd700;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  z-index: 1000;
+  max-width: 90vw;
+  box-sizing: border-box;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+  animation: brilloCasino 2s infinite ease-in-out;
+}
+
+#puntos-container span {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+@keyframes brilloCasino {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 10px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+  }
+}
+
+
+@media (max-width: 480px) {
   #puntos-container {
-    background-color: #fff0c9;
-    padding: 10px 20px;
-    border: 2px solid crimson;
-    border-radius: 10px;
-    font-size: 1.2em;
-    color: crimson;
-    font-weight: 600;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    font-size: 0.7em;
+    padding: 16px 9px;
+    right: 5px;
+    top: 15px;
   }
-  
-  #puntos-container span {
-    color: #222;
-    font-weight: bold;
-  }
-  
-  #contenedor-juego {
-    /*background-color: rgba(255, 255, 255, 0.2); /* semitransparente */
-    /*border: 3px solid crimson;*/
-    border-radius: 20px;
-    padding: 1rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: -1rem;
-    /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);*/
-    width: 100%;
-    max-width: 650px;
-    justify-content: center;
-    margin-top: -7rem;
-  }
+}
+
+
+#contenedor-juego {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+}
   
   #zona-juego {
     flex: 1;
@@ -342,24 +398,59 @@
   padding: 0 30px;
   z-index: 1000;
 }
-
-#salir, #reintentar {
+/* Botón SALIR (llamativo, estilo de advertencia) */
+#salir {
   padding: 12px 24px;
   font-size: 1.1em;
-  border: 2px solid crimson;
-  background-color: #fff0c9;
-  color: crimson;
+  border: 2px solid #39ff14; /* Verde neón */
+  background-color: #003300; /* Verde muy oscuro */
+  color: #39ff14;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 8px #39ff14;
+  transition: all 0.3s ease-in-out;
 }
 
-#salir:hover, #reintentar:hover {
-  background-color: crimson;
+#salir:hover {
+  background-color: #39ff14;
+  color: #003300;
+  box-shadow: 0 0 12px #39ff14;
+}
+
+
+
+
+
+/* Botón REINTENTAR (elegante y armónico con fondo casino) */
+#reintentar {
+  padding: 12px 24px;
+  font-size: 1.1em;
+  border: 2px solid #800000; /* Rojo vino */
+  background-color: #330000; /* Vino oscuro */
+  color: #ff9999;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+#reintentar:hover:enabled {
+  background-color: #800000;
   color: white;
 }
+
+
+/* Contenedor del botón reintentar */
+#boton-reintentar-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+
 
 #boton-reintentar-container {
   position: fixed;
@@ -368,23 +459,7 @@
   z-index: 1000;
 }
 
-#reintentar {
-  padding: 12px 20px;
-  font-size: 1.1em;
-  border: 2px solid crimson;
-  background-color: #fff0c9;
-  color: crimson;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  transition: all 0.2s ease-in-out;
-}
 
-#reintentar:hover:enabled {
-  background-color: crimson;
-  color: white;
-}
 @keyframes girarImagen {
   0% {
     transform: rotateX(0deg);
@@ -438,7 +513,7 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  background-image: url("/img/coin.png");
+  background-image: url("img/coin.png");
   background-size: cover;
   animation: caer 1.2s ease-out forwards;
 }
@@ -454,5 +529,73 @@
   100% {
     transform: translateY(300px) rotate(360deg);
     opacity: 0;
+  }
+}
+#reintentos-restantes {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 74%;
+  max-width: 300px;
+  
+  /* Efecto vidrio */
+  background: rgba(232, 210, 210, 0.811); /* Blanco semitransparente */
+  backdrop-filter: blur(6px);          /* Desenfoque detrás */
+  -webkit-backdrop-filter: blur(6px);  /* Soporte para Safari */
+
+  /* Estilo visual */
+  border: 2px solid gold;              /* Borde amarillo */
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2em;
+  color: black;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Sombra dorada suave */
+  z-index: 5;
+}
+
+@media (max-width: 480px) {
+  #reintentos-restantes {
+    top: 4%; /* Baja un poco en móviles si es necesario */
+    font-size: 1em;
+    width: 70%;
+    padding: 13px 12px;
+  }
+}
+
+#maquina {
+  position: relative;
+  width: 100%;
+  max-width: 353px; /* ajusta según tu diseño */
+  margin: -90px auto 0 auto; /* sube 20px */
+}
+
+#maquina img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 🟨 Responsive Fix para móviles muy angostos */
+@media (max-width: 400px) {
+  #ventanas {
+    top: 23%;
+    height: 5%;
+  }
+
+  .ventana {
+    width: 30%;
+    aspect-ratio: 1 / 1.35;
+  }
+}
+
+@media (max-width: 480px) {
+  #tirar {
+    top: 48%; /* un poco más abajo en móviles */
+    width: 60%;
+    height: 40px;
+    font-size: 1em;
   }
 }
