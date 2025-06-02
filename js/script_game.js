@@ -83,7 +83,7 @@ function Lanzar_inicio() {
     }
 
     botonTirar.disabled = true;
-    sonar("Lanzar.mp3");
+    sonar("/audio/Lanzar.mp3");
     activos = true;
     numeros_actuales = [];
 
@@ -176,7 +176,7 @@ function comparar() {
         mensaje += `</div>`;
         generarMonedasAnimadas(premio);
         mostrar_mensaje(mensaje);
-        sonar("ganar.mp3");
+        sonar("/audio/ganar.mp3");
         credito += premio;
 
         puntaje += premio;
@@ -218,7 +218,7 @@ function actualizar() {
 
     // ✅ Nuevo: Solo descuenta el intento cuando el crédito llegue a 0
     if (credito === 0) {
-         sonar("perder.mp3");
+         sonar("/audio/perder.mp3");
          mostrar_mensaje("<b>Has perdido todas tus monedas</b><div class='subtitulo'>Se descontará un intento</div>");
 
 
