@@ -408,7 +408,22 @@ body.light-mode {
 .nav-link:hover {
   color: var(--color3) !important;
 }
-
+.ranking-gold {
+  background-color: #fff8dc;
+  font-weight: bold;
+}
+.ranking-silver {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+.ranking-bronze {
+  background-color: #fbe5d6;
+  font-weight: bold;
+}
+.trophy-icon {
+  font-size: 1.3rem;
+  margin-right: 5px;
+}
 
 
 
