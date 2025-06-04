@@ -21,7 +21,7 @@ var imagenes_sesgadas = [
 
 var premios_por_imagen = {
     "papum.png": 1,
-    "planta1.png": 1,
+    "planta1.png": 3,
     "pera pvz.png": 2,
     "cact.png": 3,
     "imitadora2.png": 4,
@@ -90,7 +90,7 @@ function Lanzar_inicio() {
     let hubo_ganador = false;
 
     if (Math.random() < probabilidad_ganar) {
-        let opciones_comunes = ["papum.png", "planta1.png", "pera pvz.png", "cact.png"];
+        let opciones_comunes = ["papum.png", "planta1.png", "pera pvz.png", "cact.png","cancelar.png"];
         let img = opciones_comunes[Math.floor(Math.random() * opciones_comunes.length)];
         numeros_actuales = [img, img, img];
         hubo_ganador = true;
@@ -216,7 +216,7 @@ function actualizar() {
         document.getElementById("monedas").innerHTML += `<img src="img/coin.png">`;
     }
 
-    // ✅ Nuevo: Solo descuenta el intento cuando el crédito llegue a 0
+    //  Nuevo: Solo descuenta el intento cuando el crédito llegue a 0
     if (credito === 0) {
          sonar("perder.mp3");
          mostrar_mensaje("<b>Has perdido todas tus monedas</b><div class='subtitulo'>Se descontará un intento</div>");
