@@ -11,21 +11,21 @@ var probabilidad_maxima = 0.5; // no sobrepasa 50%
 
 var imagenes_sesgadas = [
     "papum.png", "papum.png", "papum.png", "papum.png",
-    "boomerang.png", "boomerang.png", "boomerang.png",
+    "planta1.png", "planta1.png", "planta1.png",
     "pera pvz.png", "pera pvz.png",
-    "cereza.png", "cereza.png",
-    "bonus.png", "bonus.png",
-    "seven.png", "seven.png",
+    "cact.png", "cact.png",
+    "imitadora2.png", "imitadora2.png",
+    "jet.png", "jet.png",
     "cancelar.png"
 ];
 
 var premios_por_imagen = {
     "papum.png": 1,
-    "boomerang.png": 2,
+    "planta1.png": 1,
     "pera pvz.png": 2,
-    "cereza.png": 3,
-    "bonus.png": 4,
-    "seven.png": 5,
+    "cact.png": 3,
+    "imitadora2.png": 4,
+    "jet.png": 5,
     "cancelar.png": 0
 };
 
@@ -90,7 +90,7 @@ function Lanzar_inicio() {
     let hubo_ganador = false;
 
     if (Math.random() < probabilidad_ganar) {
-        let opciones_comunes = ["papum.png", "boomerang.png", "pera pvz.png"];
+        let opciones_comunes = ["papum.png", "planta1.png", "pera pvz.png", "cact.png"];
         let img = opciones_comunes[Math.floor(Math.random() * opciones_comunes.length)];
         numeros_actuales = [img, img, img];
         hubo_ganador = true;
