@@ -16,12 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // 🎉 Lanza confeti al cargar los datos correctamente
-      confetti({
-        particleCount: 150,
-        spread: 100,
-        origin: { y: 0.6 },
-        colors: ['#ffd700', '#c0c0c0', '#cd7f32'] // Oro, Plata y Bronce
-      });
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 150,
+          spread: 100,
+          origin: { y: 0.6 },
+          colors: ['#ffd700', '#c0c0c0', '#cd7f32'] // Oro, Plata y Bronce
+        });
+      }
 
       data.forEach((jugador, index) => {
         const fila = document.createElement("tr");
@@ -41,3 +43,4 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     });
 });
+
