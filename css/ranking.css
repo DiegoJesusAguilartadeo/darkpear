@@ -1,6 +1,6 @@
 /* stylesranking.css */
 
-/* Contenedor principal */
+/* Contenedor */
 .container {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -11,30 +11,30 @@ h1.text-acento {
   font-family: 'Pacifico', cursive;
   font-size: 2.5rem;
   color: var(--color5);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
-/* Tabla de ranking */
+/* Tabla de ranking estilo "cuenta" */
 .table {
   background-color: var(--color1);
   color: var(--color5);
-  border-collapse: separate;
-  border-spacing: 0;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
 .table thead {
-  background-color: var(--color3);
-  color: var(--color5);
+  background-color: var(--color3); /* Aqua */
+  color: white;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .table th, .table td {
   padding: 1rem;
   vertical-align: middle;
+  border-color: rgba(255,255,255,0.1);
 }
 
 /* Botón volver */
@@ -54,3 +54,4 @@ h1.text-acento {
   background-color: #45b46d;
   transform: scale(1.05);
 }
+
