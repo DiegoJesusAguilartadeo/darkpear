@@ -49,27 +49,23 @@ document.getElementById("rankingbtn").addEventListener("click", function(event) 
   event.preventDefault();
   window.location.href = "/ranking.html";
 });
+// Inicializa el tema desde localStorage o usa "dark" por defecto
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
 
-// 🌞 Tema claro/oscuro
-const themeBtn = document.getElementById("toggleTheme");
-
-function setTheme(isLight) {
-  if (isLight) {
-    document.documentElement.setAttribute("data-theme", "light");
-    themeBtn.textContent = " Modo Oscuro";
-  } else {
-    document.documentElement.removeAttribute("data-theme");
-    themeBtn.textContent = " Modo Claro";
+  // Cambia el texto del botón según el tema actual
+  const themeToggle = document.getElementById("toggleTheme");
+  if (themeToggle) {
+    themeToggle.textContent = savedTheme === "light" ? "Modo Oscuro" : "Modo Claro";
+    
+    themeToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const nextTheme = currentTheme === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("theme", nextTheme);
+      themeToggle.textContent = nextTheme === "light" ? "Modo Oscuro" : "Modo Claro";
+    });
   }
-  localStorage.setItem("theme", isLight ? "light" : "dark");
-}
 
-const savedTheme = localStorage.getItem("theme");
-setTheme(savedTheme === "light");
-
-themeBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  const isLight = document.documentElement.getAttribute("data-theme") !== "light";
-  setTheme(isLight);
-});
 
