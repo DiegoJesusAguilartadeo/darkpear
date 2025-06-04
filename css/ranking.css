@@ -1,43 +1,46 @@
 /* stylesranking.css */
 
-/* Contenedor */
-.container {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-/* Título principal */
+/* Fuente del título */
 h1.text-acento {
   font-family: 'Pacifico', cursive;
   font-size: 2.5rem;
   color: var(--color5);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor de la tabla como tarjeta */
+.card-ranking {
+  background-color: var(--color1);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Encabezado tipo card-header */
+.card-ranking-header {
+  background-color: var(--color3); /* Aqua */
+  color: white;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
   text-align: center;
 }
 
-/* Tabla de ranking estilo "cuenta" */
-.table {
+/* Tabla interna */
+.table-ranking {
+  margin: 0;
   background-color: var(--color1);
   color: var(--color5);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-.table thead {
-  background-color: var(--color3); /* Aqua */
-  color: white;
-  font-weight: bold;
-  font-size: 1.05rem;
-}
-
-.table th, .table td {
+.table-ranking th, .table-ranking td {
   padding: 1rem;
+  text-align: center;
   vertical-align: middle;
-  border-color: rgba(255,255,255,0.1);
 }
 
-/* Botón volver */
+/* Botón */
 .btn-pear {
   background-color: var(--color6);
   color: white;
@@ -54,4 +57,5 @@ h1.text-acento {
   background-color: #45b46d;
   transform: scale(1.05);
 }
+
 

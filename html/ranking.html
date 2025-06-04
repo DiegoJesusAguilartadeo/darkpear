@@ -25,29 +25,25 @@ document.documentElement.setAttribute("data-theme", "light");
     }
   </script>
 
-  <div class="container py-5">
-    <h1 class="text-center mb-4 text-acento">Top 10 Jugadores</h1>
-
-    <div class="table-responsive">
-      <table class="table table-bordered align-middle text-center shadow" style="background-color: var(--color1); color: var(--color5);">
-        <thead style="background-color: var(--color3); color: var(--color5);">
-          <tr>
-            <th>#</th>
-            <th>Usuario</th>
-            <th>Puntuación</th>
-            <th>Fecha Registro</th>
-          </tr>
-        </thead>
-        <tbody id="tabla-ranking">
-          <tr><td colspan="4">Cargando datos...</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="text-center mt-4">
-      <a href="home.html" class="btn btn-pear">Volver</a>
-    </div>
+<div class="card-ranking mb-4">
+  <div class="card-ranking-header">Top 10 Jugadores</div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-ranking">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Usuario</th>
+          <th>Puntuación</th>
+          <th>Fecha Registro</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-ranking">
+        <tr><td colspan="4">Cargando datos...</td></tr>
+      </tbody>
+    </table>
   </div>
+</div>
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
