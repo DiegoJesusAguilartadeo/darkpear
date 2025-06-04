@@ -58,4 +58,31 @@ h1.text-acento {
   transform: scale(1.05);
 }
 
+/* Encabezados de tabla */
+.table-ranking thead th {
+  background-color: var(--color3); /* Aqua */
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+/* Celdas del cuerpo de la tabla */
+.table-ranking tbody td {
+  background-color: var(--color1); /* Fondo base (amarillo claro o similar) */
+  color: var(--color5); /* Texto oscuro o claro según el modo */
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Bordes redondeados para la tabla */
+.table-ranking {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0 0 15px 15px;
+  overflow: hidden;
+}
+
+/* Alternar color de filas */
+.table-ranking tbody tr:nth-child(even) td {
+  background-color: rgba(0, 0, 0, 0.03); /* Ligero contraste */
+}
 
