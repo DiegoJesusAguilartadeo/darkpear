@@ -118,7 +118,7 @@ function mostrar_modal_politicas() {
     
     <label>
         <input type="checkbox" id="checkbox_modal">
-<a href="/politics.html" target="_blank" style="color:yellow; text-decoration:underline;">políticas de privacidad</a>
+<a href="/politics.html" target="_blank" style="color:yellow; text-decoration:underline;"> debes aceptar las políticas de privacidad</a>
       </label>
     </div>
     <div style="margin-top:10px;">
