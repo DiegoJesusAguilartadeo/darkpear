@@ -20,7 +20,7 @@
 
 .navbar-nav .btn-outline-light {
   border-radius: 25px;
-  border: 2px solid var(--color1);
+  /* border: 2px solid var(--color1); */ /* Eliminado */
   padding: 6px 18px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -29,6 +29,7 @@
   background-color: var(--color3);
   color: var(--color5);
 }
+
 
 .hero {
   background-color: var(--color5);
