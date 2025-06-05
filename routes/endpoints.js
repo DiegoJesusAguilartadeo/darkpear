@@ -23,7 +23,7 @@ router.post("/api/registro", (req, res) => {
     }
 
     const callProcedure = "CALL tragaperas_registrar(?, ?, ?)";
-    conexion.query(callProcedure, [username, password, birthdate], (err, results) => {
+    conexion.query(callProcedure, [username, password, birtmyhdate], (err, results) => {
       if (err) {
         console.error("❌ Error al ejecutar el procedimiento:", err);
         return res.status(500).json({ message: "Error al guardar el usuario" });
