@@ -2,7 +2,7 @@ const cron = require("node-cron");
 require("dotenv").config();
 
 module.exports = function (app) {
-  cron.schedule("* * * * *", () => {
+  cron.schedule("*/20 * * * *", () => {
     console.log("🕒 Verificando para restablecer intentos...");
 
     const conexion = app.get("conexion");
