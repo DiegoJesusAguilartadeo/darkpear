@@ -614,3 +614,32 @@
   }
 }
 
+/* Botón REINTENTAR (elegante y armónico con fondo casino) */
+#boton-reintentar-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+/* Botón reintentar - estilo mejorado */
+#reintentar {
+  margin-bottom: 46px;
+  padding: 12px 24px;
+  font-size: 1.2em;
+  font-family: 'Orbitron', sans-serif;
+  border: 3px solid #800000;
+  background: radial-gradient(circle, #330000 0%, #000000 100%);
+  color: #ff9999;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px #800000, 0 0 5px #ff9999;
+  transition: all 0.3s ease-in-out;
+  text-shadow: 1px 1px 2px black;
+  animation: brilloCasinoRojo 2.8s infinite;
+}
+#reintentar:hover:enabled {
+  background-color: #800000;
+  color: white;
+}
