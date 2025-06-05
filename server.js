@@ -9,6 +9,7 @@ require("dotenv").config();
 const partidasRouter = require("./routes/partidas");
 const scoreRoutes = require('./routes/score');
 const rankingRoutes = require("./routes/top"); 
+const recoverRoutes = require("./routes/recuperar"); 
 
 
 const app = express();
