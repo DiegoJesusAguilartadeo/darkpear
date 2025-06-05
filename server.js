@@ -56,7 +56,7 @@ app.use(require("./routes/partidas"));
 app.use(require("./routes/score"));
 require("./routes/recargar")(app);
 app.use(rankingRoutes);
-app.use(require("./routes/recuperar"));
+app.use(require("./routes/recover"));
 
 
 

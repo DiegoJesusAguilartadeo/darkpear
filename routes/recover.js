@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/api/recuperar", authMiddleware, (req, res) => {
+router.post("/api/recuperar", (req, res) => {
   const { username, birthdate } = req.body;
   const conexion = req.app.get("conexion");
 
@@ -10,7 +10,6 @@ router.get("/api/recuperar", authMiddleware, (req, res) => {
   }
 
   const query = "SELECT password FROM usuarios WHERE username = ? AND birthdate = ?";
-
   conexion.query(query, [username, birthdate], (err, results) => {
     if (err) {
       return res.status(500).json({ error: "Error en la base de datos" });
@@ -25,3 +24,4 @@ router.get("/api/recuperar", authMiddleware, (req, res) => {
 });
 
 module.exports = router;
+
