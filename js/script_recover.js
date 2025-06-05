@@ -9,7 +9,7 @@
 
 
      try {
-const res = await fetch("/api/recuperar", {
+const res = await fetch("/recuperar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, birthdate })
