@@ -85,4 +85,17 @@ h1.text-acento {
 .table-ranking tbody tr:nth-child(even) td {
   background-color: rgba(0, 0, 0, 0.03); /* Ligero contraste */
 }
-
+.btn-pear {
+  background-color: var(--color6);
+  color: white;
+  font-weight: 700;
+  border-radius: 30px;
+  padding: 14px 40px;
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.1s ease, transform 0.1s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+}
