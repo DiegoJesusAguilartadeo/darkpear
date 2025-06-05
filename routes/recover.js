@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/recover", (req, res) => {
+router.post("/api/recover", (req, res) => {
   const { username, birthdate } = req.body;
   const conexion = req.app.get("conexion");
 
