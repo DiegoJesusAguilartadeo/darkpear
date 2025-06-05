@@ -6,11 +6,13 @@
       const birthdate = document.getElementById("birthdate").value;
       const resultado = document.getElementById("resultado");
 
-      try {
-        const res = await fetch("/api/recuperar", {
+
+
+     try {
+const res = await fetch("/api/recuperar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, birthdate }),
+          body: JSON.stringify({ username, birthdate })
         });
 
         const data = await res.json();
