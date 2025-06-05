@@ -3,53 +3,69 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 require("dotenv").config();
 
-router.post("/api/registro", (req, res) => {
+const bcrypt = require("bcryptjs");
+
+router.post("/api/registro", async (req, res) => {
   const conexion = req.app.get("conexion");
   const { username, password, birthdate } = req.body;
 
+  // Validación básica
   if (!username || !password || !birthdate) {
     return res.status(400).json({ message: "Faltan datos" });
   }
 
+  // Verificar si el usuario ya existe
   const checkUserQuery = "SELECT * FROM usuarios WHERE username = ?";
-  conexion.query(checkUserQuery, [username], (err, results) => {
-    if (err) {
-      console.error("❌ Error al verificar usuario:", err);
-      return res.status(500).json({ message: "Error en el servidor" });
-    }
+  conexion.query(checkUserQuery, [username], async (err, results) => {
+    if (err) return res.status(500).json({ message: "Error en el servidor" });
 
     if (results.length > 0) {
-      return res.status(409).json({ message: "El nombre de usuario ya está registrado" });
+      return res.status(409).json({ message: "El nombre de usuario ya existe" });
     }
 
-    const callProcedure = "CALL tragaperas_registrar(?, ?, ?)";
-    conexion.query(callProcedure, [username, password, birthdate], (err, results) => {
-      if (err) {
-        console.error("❌ Error al ejecutar el procedimiento:", err);
-        return res.status(500).json({ message: "Error al guardar el usuario" });
-      }
+    try {
+      // 👉 Aquí estás cifrando la contraseña ANTES de enviarla al procedimiento
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-      return res.status(200).json({ message: "Usuario registrado correctamente" });
-    });
+      const callProcedure = "CALL tragaperas_registrar(?, ?, ?)";
+      conexion.query(callProcedure, [username, hashedPassword, birthdate], (err) => {
+        if (err) {
+          console.error("❌ Error en el procedimiento:", err);
+          return res.status(500).json({ message: "Error al registrar usuario" });
+        }
+
+        res.status(201).json({ message: "Usuario registrado correctamente" });
+      });
+    } catch (err) {
+      console.error("❌ Error al cifrar:", err);
+      res.status(500).json({ message: "Error procesando la contraseña" });
+    }
   });
 });
 
 
 
+
+const bcrypt = require("bcryptjs");
+
 router.post("/api/login", (req, res) => {
   const conexion = req.app.get("conexion");
   const { username, password } = req.body;
 
-  const sql = "CALL iniciar_sesion(?, ?)";
-  conexion.query(sql, [username, password], (err, results) => {
+  const sql = "SELECT * FROM usuarios WHERE username = ?";
+  conexion.query(sql, [username], async (err, results) => {
     if (err) {
       console.error("❌ Error en login:", err);
       return res.status(500).json({ message: "Error del servidor" });
     }
 
-    const usuario = results[0][0]; // Primer usuario del primer conjunto de resultados
-
+    const usuario = results[0];
     if (!usuario) {
+      return res.status(401).json({ message: "Credenciales incorrectas" });
+    }
+
+    const passwordValida = await bcrypt.compare(password, usuario.password);
+    if (!passwordValida) {
       return res.status(401).json({ message: "Credenciales incorrectas" });
     }
 
@@ -63,7 +79,6 @@ router.post("/api/login", (req, res) => {
   });
 });
 
-module.exports = router;
 
 
 router.get("/verify", (req, res) => {
