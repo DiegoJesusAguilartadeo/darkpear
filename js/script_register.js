@@ -98,6 +98,10 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
     alert("Completa todos los campos.");
     return;
   }
+  if (password.length < 8) {
+  alert("La contraseña debe tener al menos 8 caracteres.");
+  return;
+}
 
   // Guardamos los datos en variables globales para usarlos luego
   window.registroDatos = { username, password, birthdate };
