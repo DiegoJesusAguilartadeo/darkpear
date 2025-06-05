@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/api/recover", (req, res) => {
+router.post("/recover", (req, res) => {
   const { username, birthdate } = req.body;
   const conexion = req.app.get("conexion");
 
@@ -20,7 +20,6 @@ router.post("/api/recover", (req, res) => {
       return res.status(404).json({ error: "Usuario o fecha incorrecta" });
     }
 
-    // Devuelve la contraseña tal cual está en la base de datos (ojo si está hasheada)
     res.json({ password: results[0].password });
   });
 });
