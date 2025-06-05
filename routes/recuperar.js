@@ -1,37 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const authMiddleware = require("./auth");
-require("dotenv").config();
 
-document.getElementById("recoverForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+router.post("/api/recuperar", (req, res) => {
+  const { username, birthdate } = req.body;
+  const conexion = req.app.get("conexion");
 
-  const username = document.getElementById("username").value;
-  const birthdate = document.getElementById("birthdate").value;
-  const resultado = document.getElementById("resultado");
-
-  try {
-    const res = await fetch("/recuperar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, birthdate })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      resultado.style.color = "green";
-      resultado.textContent = "Tu contraseña es: " + data.password;
-    } else {
-      resultado.style.color = "red";
-      resultado.textContent = data.error || "Error al recuperar la contraseña";
-    }
-  } catch (err) {
-    console.error("Error en fetch:", err);  // Más detalle del error
-    resultado.style.color = "red";
-    resultado.textContent = "Error de conexión al servidor: " + err.message;
+  if (!username || !birthdate) {
+    return res.status(400).json({ error: "Faltan datos" });
   }
+
+  const sql = "SELECT password FROM usuarios WHERE username = ? AND birthdate = ?";
+  conexion.query(sql, [username, birthdate], (err, results) => {
+    if (err) {
+      console.error("❌ Error en la consulta:", err);
+      return res.status(500).json({ error: "Error en la base de datos" });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: "Usuario no encontrado o fecha incorrecta" });
+    }
+
+    res.json({ password: results[0].password });
+  });
 });
+
 module.exports = router;
-
-
