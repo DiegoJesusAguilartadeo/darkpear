@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recuperar Contraseña</title>
+  <link rel="stylesheet" href="/css/recoger.css" />
+  
 </head>
 <body>
-  <h2>Recuperar Contraseña</h2>
   <form id="recoverForm">
-    <label for="username">Nombre de usuario:</label><br />
-    <input type="text" id="username" name="username" required /><br /><br />
+    <img src="/img/user-icon.png" alt="Usuario">
+    
+    <div class="mb-3">
+      <label for="username">Nombre de Usuario</label>
+      <input type="text" id="username" name="username" required>
+    </div>
 
-    <label for="birthdate">Fecha de nacimiento:</label><br />
-    <input type="date" id="birthdate" name="birthdate" required /><br /><br />
+    <div class="mb-3">
+      <label for="birthdate">Fecha de Nacimiento</label>
+      <input type="date" id="birthdate" name="birthdate" required>
+    </div>
 
-    <button type="submit">Recuperar</button>
+    <button type="submit">Recuperar Contraseña</button>
+
+    <p id="resultado" style="margin-top: 10px; font-size: 0.95em;"></p>
+    <p><a href="/login.html">Volver al login</a></p>
   </form>
 
-  <p id="resultado" style="margin-top:20px;"></p>
-
-  
-</body>
   <script src="/js/script_recover.js"></script>
-
+</body>
 </html>
