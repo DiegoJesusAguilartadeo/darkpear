@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recuperar Contraseña</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <h2>Recuperar Contraseña</h2>
+  <form id="recoverForm">
+    <label for="username">Nombre de usuario:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="birthdate">Fecha de nacimiento:</label><br>
+    <input type="date" id="birthdate" name="birthdate" required><br><br>
+
+    <button type="submit">Recuperar</button>
+  </form>
+
+  <p id="resultado" style="margin-top: 20px; color: green;"></p>
+
+  <script>
+    document.getElementById("recoverForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const birthdate = document.getElementById("birthdate").value;
+
+      const res = await fetch("/recuperar-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, birthdate })
+      });
+
+      const data = await res.json();
+
+      const resultado = document.getElementById("resultado");
+      if (res.ok) {
+        resultado.textContent = "Tu contraseña es: " + data.password;
+        resultado.style.color = "green";
+      } else {
+        resultado.textContent = data.error || "Error al recuperar la contraseña";
+        resultado.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
