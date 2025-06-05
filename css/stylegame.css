@@ -330,22 +330,17 @@
   }
   
 #puntos-container {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: linear-gradient(135deg, #004d00, #002200); /* Verde profundo con luz */
-  padding: 12px 24px;
-  border: 2px solid #ffd700; /* Dorado brillante */
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #014d01 0%, #001f00 100%);
+  border: 3px solid gold;
   border-radius: 12px;
-  font-size: 1.3em;
-  color: #ffd700;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-  z-index: 1000;
-  max-width: 90vw;
-  box-sizing: border-box;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-  animation: brilloCasino 2s infinite ease-in-out;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px gold, 0 0 5px #ffd700;
+  font-family: 'Orbitron', sans-serif;
+  animation: brilloCasinoVerde 3s infinite;
+  margin-bottom: 15px;
 }
 
 #puntos-container span {
@@ -404,23 +399,19 @@
 }
 /* Botón SALIR (llamativo, estilo de advertencia) */
 #salir {
-  padding: 12px 24px;
-  font-size: 1.1em;
-  border: 2px solid #39ff14; /* Verde neón */
-  background-color: #003300; /* Verde muy oscuro */
-  color: #39ff14;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 0 8px #39ff14;
-  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #014d01 0%, #001f00 100%);
+  border: 3px solid gold;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px gold, 0 0 5px #ffd700;
+  font-family: 'Orbitron', sans-serif;
+  animation: brilloCasinoVerde 3s infinite;
+  margin-bottom: 15px;
 }
 
-#salir:hover {
-  background-color: #39ff14;
-  color: #003300;
-  box-shadow: 0 0 12px #39ff14;
-}
 
 
 
@@ -448,11 +439,17 @@
 
 /* Contenedor del botón reintentar */
 #boton-reintentar-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #014d01 0%, #001f00 100%);
+  border: 3px solid gold;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px gold, 0 0 5px #ffd700;
+  font-family: 'Orbitron', sans-serif;
+  animation: brilloCasinoVerde 3s infinite;
+  margin-bottom: 15px;
 
 
 
