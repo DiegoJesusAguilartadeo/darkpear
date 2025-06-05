@@ -66,49 +66,53 @@
 
 #tirar {
   position: absolute;
-  top: 48%; /* justo debajo de la imagen */
+  top: 48%;
   left: 50%;
   transform: translate(-50%, 0);
-  width: 58%; /* proporcional al ancho de la máquina */
+  width: 58%;
   height: 37px;
   font-size: 1.2em;
 
-  background: linear-gradient(to bottom, #ff0033, #cc0000);
-  border: 4px solid gold;
+  background: linear-gradient(to bottom, #ffd700, #e6b800); /* dorado brillante */
+  border: 4px solid #004466; /* azul metálico */
   border-radius: 12px;
   box-shadow:
-    0 0 20px red,
-    0 0 40px gold,
-    inset 0 0 10px rgba(255, 255, 255, 0.3);
+    0 0 15px #e6b800,
+    0 0 30px #004466,
+    inset 0 0 8px rgba(255, 255, 255, 0.3);
   cursor: pointer;
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: casinoGlow 2s infinite alternate;
-  
+  animation: casinoGlowRetro 1.5s infinite alternate;
 }
 
-@keyframes casinoGlow {
+#tirar:hover, .boton:hover {
+  background-color: #005580;
+  box-shadow: 0 0 15px #ffd700 inset, 0 0 30px #ffd700;
+}
+
+/* Animación estilo neón retro */
+@keyframes casinoGlowRetro {
   0% {
     box-shadow:
-      0 0 10px red,
-      0 0 20px gold,
+      0 0 10px #ffcc00,
+      0 0 20px #ffcc00,
+      0 0 30px #004466,
       inset 0 0 5px rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, 0) scale(1);
   }
   100% {
     box-shadow:
-      0 0 20px red,
-      0 0 50px gold,
+      0 0 20px #ffff66,
+      0 0 40px #ffcc00,
+      0 0 60px #004466,
       inset 0 0 10px rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, 0) scale(1.05);
   }
 }
 
-  #tirar:hover, .boton:hover {
-  background-color: rgb(18, 210, 14);
-  box-shadow: 0 0 13px crimson inset;
-  
-}
   header {
     position: relative;
     text-align: center;
