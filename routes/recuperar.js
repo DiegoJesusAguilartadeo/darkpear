@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("./auth");
+require("dotenv").config();
 
 router.post("/api/recuperar", (req, res) => {
   const { username, birthdate } = req.body;
@@ -16,6 +18,10 @@ router.post("/api/recuperar", (req, res) => {
 
     res.json({ password: results[0].password });
   });
+});
+
+router.get("/recover", (req, res) => {
+  res.sendFile(path.join(__dirname, "recover.html"));
 });
 
 module.exports = router;
