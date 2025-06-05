@@ -27,7 +27,7 @@
       const username = document.getElementById("username").value;
       const birthdate = document.getElementById("birthdate").value;
 
-      const res = await fetch("/recover", {
+      const res = await fetch("/api/recover", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, birthdate })
