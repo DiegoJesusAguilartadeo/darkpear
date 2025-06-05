@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // POST /recuperar-password
-router.post("/api/recover", (req, res) => {
+router.post("/recover", (req, res) => {
   const { username, birthdate } = req.body;
   const conexion = req.app.get("conexion");
 
