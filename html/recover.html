@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Recuperar Contraseña</title>
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
@@ -18,7 +18,7 @@
     <button type="submit">Recuperar</button>
   </form>
 
-  <p id="resultado" style="margin-top: 20px; color: green;"></p>
+  <p id="resultado" style="margin-top: 20px; color: black;"></p>
 
   <script>
     document.getElementById("recoverForm").addEventListener("submit", async function(e) {
@@ -26,24 +26,34 @@
 
       const username = document.getElementById("username").value;
       const birthdate = document.getElementById("birthdate").value;
-
-      const res = await fetch("/recover", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, birthdate })
-      });
-
-      const data = await res.json();
-
       const resultado = document.getElementById("resultado");
-      if (res.ok) {
+      resultado.style.color = "black";
+      resultado.textContent = "Procesando...";
+
+      try {
+        const res = await fetch("/recover", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, birthdate })
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => null);
+          resultado.textContent = errData?.error || "Error al recuperar la contraseña";
+          resultado.style.color = "red";
+          return;
+        }
+
+        const data = await res.json();
         resultado.textContent = "Tu contraseña es: " + data.password;
         resultado.style.color = "green";
-      } else {
-        resultado.textContent = data.error || "Error al recuperar la contraseña";
+      } catch (err) {
+        resultado.textContent = "Error de conexión o respuesta inválida.";
         resultado.style.color = "red";
+        console.error(err);
       }
     });
   </script>
 </body>
 </html>
+
