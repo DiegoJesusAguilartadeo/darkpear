@@ -1,6 +1,8 @@
 window.onload = inicio;
 let reintentosDisponibles = 5;
 let intentoDescontado = false;
+let partidaRegistrada = false;
+
 
 const botonReintentar = document.getElementById("reintentar");
 const mostrarIntentos = document.getElementById("reintentos-restantes");
@@ -152,16 +154,12 @@ function comparar() {
 }
 
 function actualizar() {
-    document.getElementById("dinero").innerHTML = credito;
-    const dineroElemento = document.getElementById("dinero");
-    dineroElemento.classList.add("cambio");
-    setTimeout(() => dineroElemento.classList.remove("cambio"), 300);
+    mostrarCreditos.innerText = `Créditos: ${credito}`;
+    mostrarPuntaje.innerText = `Puntaje: ${puntaje}`;
+    mostrarIntentos.innerText = `Intentos restantes: ${reintentosDisponibles}`;
 
-    document.getElementById("puntaje").innerHTML = puntaje;
-    document.getElementById("monedas").innerHTML = "<img src='img/coin.png'>".repeat(credito);
-
-    if (credito === 0 && !intentoDescontado) {
-        intentoDescontado = true;
+    if (credito === 0 && !partidaRegistrada) {
+        partidaRegistrada = true;
         sonar("perder.mp3");
         mostrar_mensaje("<b>Has perdido todas tus monedas</b><div class='subtitulo'>Se descontará un intento</div>");
 
@@ -187,6 +185,7 @@ function actualizar() {
                 botonReintentar.hidden = false;
                 botonReintentar.disabled = true;
                 botonReintentar.innerText = "Sin intentos";
+                mostrarIntentos.innerText = `Intentos agotados`;
             } else {
                 fetch("/api/cuenta", {
                     headers: {
@@ -202,9 +201,11 @@ function actualizar() {
                     botonReintentar.innerText = reintentosDisponibles > 0 ? "Reintentar" : "Sin intentos";
                 });
             }
-        });
+        })
+        .catch(err => console.error("Error registrando partida:", err));
     }
 }
+
 
 function mostrar_mensaje(m) {
     const mensaje = document.getElementById("mensaje");
@@ -248,7 +249,9 @@ botonReintentar.addEventListener("click", () => {
 });
 
 function salirDelJuego() {
-    if ((credito < 5 || puntaje > 0) && !intentoDescontado) {
+    if (!partidaRegistrada && (credito < 5 || puntaje > 0)) {
+        partidaRegistrada = true;
+
         fetch("/registrar-partida", {
             method: "POST",
             headers: {
@@ -260,19 +263,28 @@ function salirDelJuego() {
                 intentos_usados: 1
             })
         })
-        .then(() => fetch("/obt", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }))
-        .then(() => window.location.href = "home.html")
-        .catch(() => window.location.href = "home.html");
+        .then(res => res.json())
+        .then(() => {
+            return fetch("/obt", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            });
+        })
+        .then(() => {
+            window.location.href = "home.html";
+        })
+        .catch(err => {
+            console.error("Error al salir:", err);
+            window.location.href = "home.html";
+        });
     } else {
         window.location.href = "home.html";
     }
 }
+
 
 document.getElementById("salir").addEventListener("click", salirDelJuego);
 
