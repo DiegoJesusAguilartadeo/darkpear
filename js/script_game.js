@@ -296,12 +296,10 @@ function sonar(audio) {
 
 botonReintentar.addEventListener("click", () => {
     if (reintentosDisponibles > 0) {
-        reintentosDisponibles--;
-
-        // Reiniciar juego
+        // Reiniciar juego sin volver a descontar
         credito = 5;
         probabilidad_ganar = 0.1;
-        
+
         actualizar();
         cerrar();
 
