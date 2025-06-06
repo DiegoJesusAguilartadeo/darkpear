@@ -21,13 +21,13 @@ var imagenes_sesgadas = [
 ];
 
 var premios_por_imagen = {
-    "papum.png": 1,
-    "girasol2.png": 1, 
-    "planta1.png": 1,
-    "pera pvz.png": 2,
-    "cact.png": 3,
-    "imitadora2.png": 4,
-    "jet.png": 5,
+    "papum.png": 2,
+    "girasol2.png": 2, 
+    "planta1.png": 2,
+    "pera pvz.png": 4,
+    "cact.png": 6,
+    "imitadora2.png": 6,
+    "jet.png": 12,
     "cabeza2.png": 0
 };
 
