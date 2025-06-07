@@ -15,7 +15,7 @@ fetch("/verify", {
     if (data.valid) {
       document.getElementById("welcome").innerHTML = `
         <a href="#" id="btnIrAlJuego" class="btn-pear">
-          Jugar
+          Dormir
         </a>
       `;
 
